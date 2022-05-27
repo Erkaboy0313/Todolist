@@ -1,17 +1,36 @@
 from django.http import HttpResponse
-from django.shortcuts import render
-from django.http.response import HttpResponse
+from django.shortcuts import render,redirect
+from .models import UserList,Item
+from .forms import CreateList
 
 # Create your views here.
 
 def index(request):
-    return HttpResponse('Hello world')
+    lists = UserList.objects.all()
+    context = {
+        'lists':lists
+    }
+    return render(request,'index.html',context)
 
-def hello(request,name):
-    return HttpResponse(f'Hello {name}')
+def items(request,id):
+    list = UserList.objects.get(id = id)
+    items = Item.objects.filter(list_name = list)
+    context = {
+        'list':list,
+        'items':items
+    }
+    return render(request,'items.html',context)
 
-def age(request,name,age):
-    return HttpResponse(f'hello I am {name}, I am {age} year old')
+def create(request):
+    if request.method == "POST":
+        form = CreateList(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data.get('name')
+            UserList.objects.create(name = name)
 
-def page(request):
-    return render(request,'index.html')
+        # name = request.POST.get('name')
+            return redirect('index')
+        else:
+            return HttpResponse('Some thing went wrong')
+    form = CreateList()
+    return render(request,'create.html',{'form':form})

@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello world</title>
+    <title>Document</title>
 </head>
 <body>
-    <div>
-        {% for list in lists %}
-
-            <p><a href="items/{{ list.id }}">{{ list.name }}</a></p>
-
-        {% endfor %}
-    </div>
+    <h3>{{ list.name }}</h3>
+    {% for item in list.item_set.all %}
+    <ul>
+        <li>{{ item.name }}</li>
+        <li>{{ item.is_done }}</li>
+    </ul>
+    {% endfor %}
 </body>
 </html>
