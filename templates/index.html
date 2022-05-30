@@ -8,6 +8,7 @@
 </head>
 <body>
     <div>
+        <h3>{{ request.user.username }}</h3>
         {% for list in lists %}
 
             <p><a href="items/{{ list.id }}">{{ list.name }}</a></p>

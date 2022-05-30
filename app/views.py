@@ -6,7 +6,10 @@ from .forms import CreateList
 # Create your views here.
 
 def index(request):
-    lists = UserList.objects.all()
+    if request.user.is_authenticated:
+        lists = UserList.objects.filter(user = request.user)
+    else:
+        lists = []
     context = {
         'lists':lists
     }
@@ -23,14 +26,17 @@ def items(request,id):
 
 def create(request):
     if request.method == "POST":
-        form = CreateList(request.POST)
-        if form.is_valid():
-            name = form.cleaned_data.get('name')
-            UserList.objects.create(name = name)
+        if request.user.is_authenticated:
+            form = CreateList(request.POST)
+            if form.is_valid():
+                name = form.cleaned_data.get('name')
+                UserList.objects.create(user = request.user, name = name)
 
-        # name = request.POST.get('name')
-            return redirect('index')
+            # name = request.POST.get('name')
+                return redirect('index')
+            else:
+                return HttpResponse('Some thing went wrong')
         else:
-            return HttpResponse('Some thing went wrong')
+            return redirect('login')
     form = CreateList()
     return render(request,'create.html',{'form':form})

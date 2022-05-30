@@ -9,10 +9,14 @@
 <body>
     <h3>{{ list.name }}</h3>
     {% for item in list.item_set.all %}
-    <ul>
-        <li>{{ item.name }}</li>
-        <li>{{ item.is_done }}</li>
-    </ul>
+    <form>
+        {% if item.is_done %}
+            <input type="checkbox" checked>
+        {% else %}
+            <input type="checkbox">
+        {% endif %}
+        <p>{{ item.name }}</p>
+    </form>
     {% endfor %}
 </body>
 </html>
