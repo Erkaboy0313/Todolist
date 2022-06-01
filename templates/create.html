@@ -1,24 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-    <div>
-        <h3>Create List</h3>
-        <form method="post">
-            {% csrf_token %}
-            <label for="name">List name:</label>
-            <input name="name" type="text">
-            <!-- {{ form }} -->
-            <input name="submit" type="submit" value="Create">
-        </form>
-    </div>
-    
+{% extends 'index.html' %}
 
-</body>
-</html>
+{% block title %} 
+    Create new list 
+{% endblock %}
+
+{% block content %}
+<h3> New List</h3> 
+    <form action="/create/" method="POST">
+    {% csrf_token %}
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <button type="submit" name="save" class="btn btn-success">Add New Item</button>
+            </div>
+            {{form.name}}
+        </div>
+    </form>
+{% endblock %}

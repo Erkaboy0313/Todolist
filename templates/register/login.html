@@ -1,20 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Log in</title>
-</head>
-<body>
-    <form method="post">
-        {% csrf_token %}
+{% extends 'index.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+Login here
+{% endblock %}
 
-        <input type="text" name="username" placeholder="Username">
-        <input type="password" name="password" placeholder="Password">
+{% block content %}
 
-        <input type="submit" value="Log in">
-        
-    </form>
-</body>
-</html>
+<form action="#" method="post" class="from-group">
+    {% csrf_token %}
+    {{form | crispy}}
+    <p>If you have no accaunt please register<a href="/register">here</a></p>
+    <button type="submit" class="btn btn-success">Login</button>
+</form>
+{% endblock %}

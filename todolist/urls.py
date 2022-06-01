@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from userregister.views import register,log_in,log_out
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,3 +26,5 @@ urlpatterns = [
     path('logout/',log_out,name='logout'),
     path('', include('app.urls')),
 ]
+
+urlpatterns += static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)

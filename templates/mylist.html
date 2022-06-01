@@ -1,0 +1,13 @@
+{% extends 'index.html' %}
+
+{% block title %}
+My list
+{% endblock %}
+
+
+
+{% block content %}
+    {% for td in lists %}
+        <p><a href="/items/{{td.id}}">{{td.name}}</a></p>
+    {% endfor %}
+{% endblock %}

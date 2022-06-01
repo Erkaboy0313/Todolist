@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from .forms import RegisterForm
+from app.forms import Loginform
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 # Create your views here.
@@ -19,6 +20,7 @@ def register(request):
             'form':form
         }
         return render(request,'register/register.html',context)
+
 def log_in(request):
     if request.method == "POST":
         username = request.POST.get('username')
@@ -30,7 +32,8 @@ def log_in(request):
         else:
             return HttpResponse('User not found')
     else:
-        return render(request,'register/login.html')
+        form = Loginform()
+        return render(request,'register/login.html',{'form':form})
 
 def log_out(request):
     if request.user.is_authenticated:
