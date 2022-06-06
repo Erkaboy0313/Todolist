@@ -7,6 +7,7 @@ Login here
 {% block content %}
 
 <form action="#" method="post" class="from-group">
+    {% include 'partials/messages.html' %}
     {% csrf_token %}
     {{form | crispy}}
     <p>If you have no accaunt please register<a href="/register">here</a></p>

@@ -1,6 +1,6 @@
 {%  extends 'index.html' %}
 {% block title %}
-{{list.name}}
+{{ list.name }}
 {% endblock %}
 
 {% block style %}
@@ -9,19 +9,20 @@
             padding-top: 10px;
             margin-bottom: 0;
         }
-    </style> -->
+</style> -->
 {% endblock %}
 
 
 {% block content %}
     <h1>{{list.name}}</h1>
-    <form action="#" method="post">
+    <form method="post" action="/handle_items/{{ list.id }}">
+    {% include 'partials/messages.html' %}
         {% csrf_token %}
         {% for item in list.item_set.all %}
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <div class="input-group-text" style="margin-bottom: 0; padding: 12px;">
-                        {% if item.complate == True %}    
+                        {% if item.is_done == True %}    
                             <input type="checkbox" value="clicked" name="s{{item.id}}" checked>
                         {% else %}
                             <input type="checkbox" value="clicked" name="s{{item.id}}">
@@ -41,3 +42,4 @@
         <button type="submit" value="save" name="save" class="btn btn-success">Save</button>
     </form>
 {% endblock %}
+

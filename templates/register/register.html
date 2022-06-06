@@ -7,8 +7,9 @@ Register
 {% block content %}
 
 <form action="#" method="post">
+{% include 'partials/messages.html' %}
 {% csrf_token %}
-    {{form | crispy}}
+    {{ form | crispy }}
     <button type="submit" name="register" , value="register" class="btn btn-success">Register</button>
 </form>
 {% endblock %}
