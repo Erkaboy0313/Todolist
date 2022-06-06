@@ -10,7 +10,7 @@ def index(request):
     return render(request,'index.html')
 
 def notfound(request):
-    return render(request,'notfound.html')
+    return render(request,'404.html')
 
 def lists(request):
     if request.user.is_authenticated:
