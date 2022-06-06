@@ -5,8 +5,6 @@ from .models import UserList,Item
 from .forms import CreateList
 from django.contrib import messages
 
-# Create your views here.
-
 def index(request):
 
     return render(request,'index.html')
