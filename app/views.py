@@ -9,6 +9,9 @@ def index(request):
 
     return render(request,'index.html')
 
+def notfound(request):
+    pass
+
 def lists(request):
     if request.user.is_authenticated:
         lists = UserList.objects.filter(user = request.user)
