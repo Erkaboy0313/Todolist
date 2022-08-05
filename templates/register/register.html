@@ -6,6 +6,7 @@ Register
 
 {% block content %}
 
+{% include 'partials/_flash_messages.html'%}
 <form action="#" method="post">
 {% csrf_token %}
     {{form | crispy}}

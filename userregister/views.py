@@ -4,22 +4,23 @@ from .forms import RegisterForm
 from app.forms import Loginform
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
+from django.contrib import messages
 # Create your views here.
 
 def register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.errors:
-            return HttpResponse(f"{form.errors}")
+            messages.add_message(request,messages.WARNING,form.errors)
         else:
             form.save()
             return redirect('login')
-    else:
-        form = RegisterForm()
-        context = {
-            'form':form
-        }
-        return render(request,'register/register.html',context)
+
+    form = RegisterForm()
+    context = {
+        'form':form
+    }
+    return render(request,'register/register.html',context)
 
 def log_in(request):
     if request.method == "POST":
@@ -30,10 +31,9 @@ def log_in(request):
             login(request=request,user=user)
             return redirect('index')
         else:
-            return HttpResponse('User not found')
-    else:
-        form = Loginform()
-        return render(request,'register/login.html',{'form':form})
+            messages.add_message(request,messages.WARNING,'User not found')
+    form = Loginform()
+    return render(request,'register/login.html',{'form':form})
 
 def log_out(request):
     if request.user.is_authenticated:

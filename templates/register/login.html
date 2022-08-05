@@ -6,6 +6,7 @@ Login here
 
 {% block content %}
 
+{% include 'partials/_flash_messages.html'%}
 <form action="#" method="post" class="from-group">
     {% csrf_token %}
     {{form | crispy}}
