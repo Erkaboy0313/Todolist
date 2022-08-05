@@ -3,6 +3,7 @@ from django.shortcuts import render,redirect
 from .models import UserList,Item
 from .forms import CreateList
 
+
 # Create your views here.
 
 def index(request):
