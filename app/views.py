@@ -7,7 +7,7 @@ from .forms import CreateList
 # Create your views here.
 
 def index(request):
-
+    "index pageni render qilish"
     return render(request,'index.html')
 
 def notfound(request):
